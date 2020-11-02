@@ -48,6 +48,7 @@ function Counter() {
 
   const handleReset = () => {
     setCounter(0)
+    setStep(1)
     toast({
       title: `Counter reseted to 0`,
       description: `Counter is now 0`,
