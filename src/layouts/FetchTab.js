@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
+import { Button, Spinner, HStack, UnorderedList, ListItem, Input } from '@chakra-ui/core'
  
 function FetchTab() {
   const [data, setData] = useState({ hits: [] });
@@ -30,31 +31,40 @@ function FetchTab() {
  
   return (
     <>
-    <form onSubmit={event => {
+    <HStack mb="6">
+    <form mt="6" mb="12" w="360px" h="60px" onSubmit={event => {
           setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`);
 
           event.preventDefault();
         }}>
-    <input 
+    <Input 
       type="text" 
       value={query} 
       onChange={event => setQuery(event.target.value)}
+      mb="2"
     />
-    <button type="submit">Search</button>
+    <Button type="submit" colorScheme="teal" size="md">Search</Button>
     </form>
+    </HStack>
 
     {isError && <div>Something went wrong ...</div>}
 
     {isLoading ? (
-      <div>Loading ...</div>
+      <Spinner
+      thickness="4px"
+      speed="0.65s"
+      emptyColor="gray.200"
+      color="blue.500"
+      size="xl"
+    />
     ) : (
-      <ul>
+      <UnorderedList>
       {data.hits.map(item => (
-        <li key={item.objectID}>
+        <ListItem key={item.objectID}>
           <a href={item.url}>{item.title}</a>
-        </li>
+        </ListItem>
       ))}
-    </ul>
+    </UnorderedList>
     )}
     </>
   );

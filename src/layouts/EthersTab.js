@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Heading, Text } from '@chakra-ui/core'
+import { Heading, Text, Center, Box, HStack } from '@chakra-ui/core'
 import { ethers } from 'ethers'
 
 function EthersTab() {
@@ -45,16 +45,25 @@ function EthersTab() {
 
   return (
     <>
-      <Heading>Web3 with ethers.js</Heading>
-      <Text>Metamask status: {isEnable ? 'connected' : 'disconnect'}</Text>
+    <Center>
+    <Heading as="h1" size="2xl" color="green.700" mb="12">Web3 with ethers.js</Heading>
+    </Center>
+    <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
+      <HStack>
+      <Text fontSize="2xl">Metamask status: </Text>
+      {isEnable ? 
+        <Text color="green.500" fontSize="3xl">'connected'</Text> :
+        <Text color="red.500" fontSize="3xl">'disconnected'</Text>}
+      </HStack>
       {network !== null && (
         <>
-          <Text>Account: {account}</Text>
-          <Text>Network name: {network.name}</Text>
-          <Text>Network id: {network.chainId}</Text>
-          <Text>Balance: {balance}</Text>
+          <Text fontSize="2xl">Account: {account}</Text>
+          <Text fontSize="2xl">Network name: {network.name}</Text>
+          <Text fontSize="2xl">Network id: {network.chainId}</Text>
+          <Text fontSize="2xl">Balance: {balance}</Text>
         </>
       )}
+      </Box>
     </>
   )
 }
