@@ -16,6 +16,7 @@ function Counter() {
   const [counter, setCounter] = useState(0)
   const [step, setStep] = useState(1)
   const toast = useToast()
+
   const handleIncrement = (step) => {
     const cnt = counter + step
     setCounter(counter + step)
